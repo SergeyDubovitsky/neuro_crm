@@ -34,3 +34,4 @@ source = ["neuro_crm"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "neuro_crm.settings.local"
+python_files = "tests.py test_*.py *_tests.py"

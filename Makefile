@@ -1,5 +1,4 @@
-manage = python manage.py
-
+include .env.example
 
 .PHONY: lint
 lint:
@@ -14,8 +13,8 @@ check_lint:
 
 .PHONY: check_migrations
 check_migrations:
-	$(manage) makemigrations --check --dry-run --verbosity 3
+	python manage.py makemigrations --check --dry-run --verbosity 3
 
 .PHONY: tests
 tests:
-	pytest --cov
+	pytest -x --cov
