@@ -1,0 +1,15 @@
+[project]
+name = "neuro-crm"
+version = "0.0.1"
+description = "Neuro CRM"
+license = { file = "LICENSE" }
+authors = [{ name = "Sergey Dubovitsky" }]
+requires-python = ">=3.12, <3.13"
+readme = "README.md"
+
+[tool.ruff]
+line-length = 79
+src = ["neuro_crm"]
+
+[tool.ruff.lint]
+extend-select = ["I"]
