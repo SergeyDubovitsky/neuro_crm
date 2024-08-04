@@ -15,9 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - uses: yezz123/setup-uv@v4
 
       - name: install_dependencies
-        run: pip install -r requirements_dev.txt
+        run: uv pip install -r requirements_dev.txt
 
       - name: check_lint
         run: make check_lint
