@@ -25,7 +25,6 @@ server {
     ssl_certificate_key /etc/nginx/ssl/live/${DOMAIN}/privkey.pem;
 
     location / {
-        set $django_upstream host.docker.internal;
-        proxy_pass  http://$django_upstream:8001;
+        proxy_pass http://django:8001;
     }
 }
