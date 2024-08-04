@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: install_dependencies
+        run: pip install -r requirements_dev.txt
+
       - name: check_lint
         run: make check_lint
 
