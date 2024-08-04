@@ -1,4 +1,4 @@
-name: CI
+name: Check Lint Migrations Run Tests
 
 on:
   push:
