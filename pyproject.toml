@@ -12,4 +12,9 @@ line-length = 79
 src = ["neuro_crm"]
 
 [tool.ruff.lint]
-extend-select = ["I"]
+extend-select = ["I", "E", "W", "F"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 85

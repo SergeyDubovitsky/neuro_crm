@@ -11,7 +11,7 @@ on:
       - dev
 
 jobs:
-  check_lint_migrations:
+  lint_migrations_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,3 +24,6 @@ jobs:
 
       - name: check_migrations
         run: make check_migrations
+
+      - name: tests
+        run: make tests
