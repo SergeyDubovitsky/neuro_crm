@@ -11,6 +11,10 @@ check_lint:
 	ruff format --check .
 	ruff check .
 
+.PHONY: install_requirements_dev
+install_requirements_dev:
+	uv pip install -r requirements_dev.txt
+
 .PHONY: check_migrations
 check_migrations:
 	python manage.py makemigrations --check --dry-run --verbosity 3

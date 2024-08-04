@@ -33,8 +33,8 @@ jobs:
         run: |
           echo ${{ github.event.repository.name }}
 
-      - name: install_dependencies
-        run: uv pip install -r requirements_dev.txt
+      - name: install_requirements_dev
+        run: make install_requirements_dev
 
       - name: check_lint
         run: make check_lint
@@ -42,5 +42,5 @@ jobs:
       - name: check_migrations
         run: make check_migrations
 
-      - name: tests
+      - name: run_tests
         run: make tests
