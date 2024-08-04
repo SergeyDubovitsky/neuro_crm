@@ -16,5 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: up containers
+        run: docker-compose up -d django
+
       - name: check_lint
-        run: make check_lint
+        run: docker-compose exec django make check_lint
