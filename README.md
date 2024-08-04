@@ -1,9 +1,15 @@
 # Neuro CRM
 
-Установка сертификатов для работы с https на VPS
+## Установка сертификатов для работы с https на VPS
 
 ```bash
-docker compose -f docker-compose.mginx.yml up -d
-docker compose -f docker-compose.mginx.yml exec certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d $DOMAIN
+docker compose -f docker-compose.nginx.yml up -d
 ```
-
+Проверить dry-run
+```bash
+docker compose -f docker-compose.nginx.yml exec certbot /bin/sh -c 'certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d "$DOMAIN"'
+```
+Получить сертификат
+```bash
+docker compose -f docker-compose.nginx.yml exec certbot /bin/sh -c 'certbot certonly --webroot --webroot-path /var/www/certbot/ -d "$DOMAIN"'
+```
