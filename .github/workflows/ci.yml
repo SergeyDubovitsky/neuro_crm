@@ -24,5 +24,3 @@ jobs:
 
       - name: check_migrations
         run: make check_migrations
-
-
