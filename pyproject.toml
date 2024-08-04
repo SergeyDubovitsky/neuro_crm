@@ -18,3 +18,16 @@ extend-select = ["I", "E", "W", "F"]
 show_missing = true
 skip_empty = true
 fail_under = 85
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/urls.py",
+    "manage.py",
+    "*/management/commands/*",
+    "neuro_crm/wsgi.py",
+    "neuro_crm/asgi.py",
+]
+source = ["."]
