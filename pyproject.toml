@@ -30,4 +30,7 @@ omit = [
     "neuro_crm/wsgi.py",
     "neuro_crm/asgi.py",
 ]
-source = ["."]
+source = ["neuro_crm"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "neuro_crm.settings.local"
