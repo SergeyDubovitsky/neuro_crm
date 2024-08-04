@@ -17,7 +17,5 @@ check_migrations:
 
 .PHONY: tests
 tests:
-	cp -n .env.example .env; \
-	set -a && source .env && set +a; \
-	env; \
+	set -a && source .env.example && set +a; \
 	pytest -x --cov

@@ -24,6 +24,11 @@ jobs:
         with:
           uv-venv: ".venv"
 
+      - uses: cardinalby/export-env-action@v1
+        with:
+          envFile: '.env.example'
+          expand: 'true'
+
       - name: Debug
         run: |
           echo ${{ github.event.repository.name }}
