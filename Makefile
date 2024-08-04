@@ -19,4 +19,5 @@ check_migrations:
 tests:
 	cp -n .env.example .env; \
 	set -a && source .env && set +a; \
+	env; \
 	pytest -x --cov
