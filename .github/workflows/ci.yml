@@ -11,13 +11,15 @@ on:
       - dev
 
 jobs:
-  lint:
+  check_lint_migrations:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: up containers
-        run: docker compose up -d django
-
       - name: check_lint
-        run: docker compose exec django make check_lint
+        run: make check_lint
+
+      - name: check_migrations
+        run: make check_migrations
+
+
