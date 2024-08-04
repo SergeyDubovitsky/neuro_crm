@@ -1,0 +1,6 @@
+services:
+  django:
+    build: .
+    ports:
+      - "8001:8000"
+    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8001
