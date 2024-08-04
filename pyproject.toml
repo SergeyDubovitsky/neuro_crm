@@ -29,6 +29,7 @@ omit = [
     "*/management/commands/*",
     "neuro_crm/wsgi.py",
     "neuro_crm/asgi.py",
+    "neuro_crm/settings/*",
 ]
 source = ["neuro_crm"]
 
