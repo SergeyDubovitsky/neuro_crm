@@ -11,13 +11,13 @@ on:
       - dev
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: up containers
-        run: docker-compose up -d django
+        run: docker compose up -d django
 
       - name: check_lint
-        run: docker-compose exec django make check_lint
+        run: docker compose exec django make check_lint
