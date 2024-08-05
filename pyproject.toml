@@ -12,7 +12,11 @@ line-length = 79
 src = ["neuro_crm"]
 
 [tool.ruff.lint]
-extend-select = ["I", "E", "W", "F"]
+extend-select = ["E", "F", "W", "Q", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"neuro_crm/settings/local.py" = ["F405"]
+
 
 [tool.coverage.report]
 show_missing = true
@@ -36,3 +40,4 @@ source = ["neuro_crm"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "neuro_crm.settings.local"
 python_files = "tests.py test_*.py *_tests.py"
+addopts = "--reuse-db"

@@ -9,6 +9,10 @@ coverage==7.6.0
     #   -r requirements_dev.txt
     #   pytest-cov
 django==5.0.7
+    # via
+    #   -r requirements_dev.txt
+    #   django-extensions
+django-extensions==3.2.3
     # via -r requirements_dev.txt
 iniconfig==2.0.0
     # via

@@ -1,7 +1,7 @@
 include .env.example
 
-.PHONY: lint
-lint:
+.PHONY: format
+format:
 	ruff check --select I --fix .
 	ruff check --fix .
 	ruff format .
