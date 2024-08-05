@@ -33,14 +33,14 @@ jobs:
         run: |
           echo ${{ github.event.repository.name }}
 
-      - name: install_requirements_dev
+      - name: Install Requirements Dev
         run: make install_requirements_dev
 
-      - name: check_lint
+      - name: Check Lint
         run: make check_lint
 
-      - name: check_migrations
+      - name: Check Migrations
         run: make check_migrations
 
-      - name: run_tests
+      - name: Run Tests
         run: make tests
