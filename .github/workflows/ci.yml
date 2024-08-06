@@ -44,3 +44,6 @@ jobs:
 
       - name: Run Tests
         run: make tests
+
+      - name: Update Coverage Badge
+        uses: we-cli/coverage-badge-action@main

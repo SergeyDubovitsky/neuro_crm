@@ -1,5 +1,7 @@
 # Neuro CRM
 
+[![cov](https://SergeyDubovitsky.github.io/neuro_crm/badges/coverage.svg)](https://github.com/SergeyDubovitsky/neuro_crm/actions)
+
 ## Установка сертификатов для работы с https на VPS
 
 ```bash
