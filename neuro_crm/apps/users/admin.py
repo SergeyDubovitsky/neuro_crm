@@ -1,25 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.admin import UserAdmin as UserAdmin_
 
 User = get_user_model()
 
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ("email",)
-
-
-class CustomUserChangeForm(UserChangeForm):
-    class Meta:
-        model = User
-        fields = ("email",)
-
-
-class UserAdmin(admin.ModelAdmin):
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
+class UserAdmin(UserAdmin_):
     model = User
     list_display = (
         "id",
