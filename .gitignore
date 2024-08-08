@@ -175,7 +175,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-docker/certbot/
-docker/nginx/conf/
-!docker/nginx/conf/default.template
-!docker/nginx/conf/letsencrypt.template
+nginx/certbot/
+nginx/nginx/conf/
+!nginx/nginx/conf/default.template
+!nginx/nginx/conf/letsencrypt.template
