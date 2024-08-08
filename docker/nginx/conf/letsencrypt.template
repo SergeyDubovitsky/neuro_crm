@@ -8,4 +8,8 @@ server {
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
+
+    location / {
+        return 301 https://${DOMAIN}$request_uri;
+    }
 }

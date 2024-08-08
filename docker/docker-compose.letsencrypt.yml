@@ -12,10 +12,11 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     env_file:
       - .env.letsencrypt
-    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/letsencrypt.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/letsencrypt.template > /etc/nginx/conf.d/letsencrypt.conf && nginx -g 'daemon off;'"
 
   certbot:
     image: certbot/certbot:latest
+    entrypoint: ["/bin/sh", "-c"]
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
