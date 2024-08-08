@@ -22,4 +22,4 @@ check_migrations:
 .PHONY: tests
 tests:
 	set -a && source .env.example && set +a; \
-	pytest -x --cov
+	pytest -x --cov --junitxml=junit.xml
