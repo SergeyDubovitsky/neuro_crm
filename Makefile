@@ -27,4 +27,4 @@ tests:
 
 .PHONY: up_services
 up_services:
-	docker-compose up -d
+	docker compose up -d
