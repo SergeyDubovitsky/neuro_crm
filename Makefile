@@ -27,4 +27,5 @@ tests:
 
 .PHONY: up_services
 up_services:
+	cp .env.example .env; \
 	docker compose up -d
