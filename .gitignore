@@ -179,3 +179,5 @@ nginx/certbot/
 nginx/nginx/conf/
 !nginx/nginx/conf/default.template
 !nginx/nginx/conf/letsencrypt.template
+
+docker/minio
