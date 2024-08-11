@@ -23,3 +23,9 @@ check_migrations:
 tests:
 	set -a && source .env.example && set +a; \
 	pytest -x --cov --junitxml=junit.xml
+
+
+.PHONY: up_services
+up_services:
+	cp .env.example .env; \
+	docker compose up -d

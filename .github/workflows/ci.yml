@@ -42,6 +42,9 @@ jobs:
       - name: Check Migrations
         run: make check_migrations
 
+      - name: Up Services
+        run: make up_services
+
       - name: Run Tests
         run: make tests
 
