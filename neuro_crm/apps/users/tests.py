@@ -20,3 +20,7 @@ class TestUsers:
         url = get_admin_changelist_url("users", "user")
         res = client.get(url)
         assert res.status_code == 200
+
+    def test_manager(self):
+        with pytest.raises(ValueError):
+            User.objects.create_user(email="", password="123")
