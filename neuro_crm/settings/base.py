@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users",
+    "specialists",
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,74 @@ MINIO_ROOT_USER = os.getenv("MINIO_ROOT_USER")
 MINIO_ROOT_PASSWORD = os.getenv("MINIO_ROOT_PASSWORD")
 MINIO_BUCKET_NAME = os.getenv("MINIO_BUCKET_NAME")
 MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")
+
+LOGGING = {
+    "version": 1,
+    "root": {
+        "level": "INFO",
+        "handlers": ["console"],
+    },
+    "formatters": {
+        "verbose": {
+            "format": "%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s"  # noqa
+        },
+    },
+    "handlers": {
+        "null": {
+            "level": "DEBUG",
+            "class": "logging.NullHandler",
+        },
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("LOG_LEVEL") or "DEBUG",
+            "propagate": False,
+        },
+        "django.template": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "django.server": {
+            "handlers": ["null"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+        "django.utils": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_DB_LEVEL") or "DEBUG",
+            "propagate": False,
+        },
+        "neuro_crm": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "celery": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "redis": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}

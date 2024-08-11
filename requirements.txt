@@ -20,6 +20,10 @@ django-extensions==3.2.3
     # via -r requirements.txt
 django-storages==1.14.4
     # via -r requirements.txt
+factory-boy==3.3.0
+    # via -r requirements.txt
+faker==26.3.0
+    # via factory-boy
 jmespath==1.0.1
     # via
     #   -r requirements.txt
@@ -29,6 +33,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements.txt
     #   botocore
+    #   faker
 s3transfer==0.10.2
     # via
     #   -r requirements.txt

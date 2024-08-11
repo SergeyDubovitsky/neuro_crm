@@ -1,30 +1,22 @@
 import pytest
 from django.contrib.auth import get_user_model
-from django.urls import reverse
+
+from neuro_crm.core.admin import get_admin_change_url, get_admin_changelist_url
 
 User = get_user_model()
 
 
-@pytest.fixture
-def superuser():
-    return User.objects.create_superuser(
-        email="email@email.email", password="111"
-    )
-
-
 @pytest.mark.django_db
 class TestUsers:
-    def test_user_admin(self, superuser, client):
-        assert str(superuser)
+    def test_user_admin(self, admin_user, client):
+        assert str(admin_user)
 
-        client.force_login(superuser)
+        client.force_login(admin_user)
 
-        url = reverse(
-            "admin:%s_%s_change" % ("users", "user"), args=(superuser.id,)
-        )
+        url = get_admin_change_url("users", "user", admin_user.id)
         res = client.get(url)
         assert res.status_code == 200
 
-        url = reverse("admin:%s_%s_changelist" % ("users", "user"))
+        url = get_admin_changelist_url("users", "user")
         res = client.get(url)
         assert res.status_code == 200

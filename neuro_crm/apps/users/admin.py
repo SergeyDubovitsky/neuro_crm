@@ -10,6 +10,7 @@ class UserAdmin(UserAdmin_):
     list_display = (
         "id",
         "email",
+        "phone",
         "is_staff",
         "is_active",
         "is_superuser",
@@ -28,8 +29,7 @@ class UserAdmin(UserAdmin_):
             None,
             {
                 "fields": (
-                    "first_name",
-                    "last_name",
+                    "phone",
                     "email",
                     "password",
                     "email_is_confirmed",
@@ -64,8 +64,7 @@ class UserAdmin(UserAdmin_):
             {
                 "classes": ("wide",),
                 "fields": (
-                    "first_name",
-                    "last_name",
+                    "phone",
                     "email",
                     "password1",
                     "password2",
@@ -76,7 +75,7 @@ class UserAdmin(UserAdmin_):
             },
         ),
     )
-    search_fields = ("email",)
+    search_fields = ("email", "phone")
     ordering = ("-id",)
 
 
