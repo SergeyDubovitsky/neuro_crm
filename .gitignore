@@ -181,3 +181,4 @@ nginx/nginx/conf/
 !nginx/nginx/conf/letsencrypt.template
 
 docker/minio
+.run/
