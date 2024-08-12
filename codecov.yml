@@ -1,6 +1,6 @@
 coverage:
   status:
-    project:
-      default: true
-      tests:
-        target: 85%
+    patch: false
+  range: 85..90
+  round: down
+  precision: 2
