@@ -4,9 +4,14 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS += ["django_extensions"]
 
-
-DEFAULT_FILE_STORAGE = "neuro_crm.core.storages.MediaStorage"
-STATICFILES_STORAGE = "neuro_crm.core.storages.StaticStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": "neuro_crm.core.storages.MediaStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "neuro_crm.core.storages.StaticStorage",
+    },
+}
 
 AWS_ACCESS_KEY_ID = MINIO_ROOT_USER
 AWS_SECRET_ACCESS_KEY = MINIO_ROOT_PASSWORD
