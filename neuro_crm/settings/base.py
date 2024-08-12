@@ -247,3 +247,10 @@ CELERY_RESULT_EXPIRES = int(
 )
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+if "pytest" in sys.argv[0]:
+    PASSWORD_HASHERS = [
+        "django.contrib.auth.hashers.MD5PasswordHasher",
+    ]
+    BROKER_BACKEND = "memory"
+    CELERY_TASK_ALWAYS_EAGER = True

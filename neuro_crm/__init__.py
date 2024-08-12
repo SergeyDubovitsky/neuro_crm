@@ -1,3 +1,3 @@
-from neuro_crm.core import celery_app
+from neuro_crm.core.celery import app as celery_app
 
 __all__ = ("celery_app",)
