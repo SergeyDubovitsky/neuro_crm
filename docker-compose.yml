@@ -23,3 +23,51 @@ services:
       mc mb --quiet neuro-crm-minio/files;
       mc policy set none neuro-crm-minio/files;
       "
+
+  redis:
+    image: redis/redis-stack:latest
+    volumes:
+      - ./docker/redis/data:/data
+    env_file:
+      - .env
+    ports:
+      - 6379:6379
+    command: >
+      /bin/sh -c "
+      redis-server --requirepass $REDIS_PASSWORD
+      "
+  celery_worker_0:
+    &celery_worker_0
+    build:
+        context: .
+        dockerfile: ./Dockerfile
+    hostname: celery_worker_0
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: celery -A neuro_crm worker -l INFO
+
+  celery_beat:
+    <<: *celery_worker_0
+    depends_on:
+      - celery_worker_0
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: celery -A neuro_crm beat -l DEBUG -S django
+
+  flower:
+    <<: *celery_worker_0
+    depends_on:
+      - celery_worker_0
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - '5555:5555'
+    command: celery -A neuro_crm flower --port=5555

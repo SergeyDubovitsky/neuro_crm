@@ -14,10 +14,11 @@ import os
 import sys
 from pathlib import Path
 
+from neuro_crm.core.utils import strtobool
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_celery_beat",
+    "neuro_crm.core",
     "users",
     "specialists",
 ]
@@ -112,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru-RU"
 
 TIME_ZONE = "UTC"
 
@@ -210,3 +213,43 @@ LOGGING = {
         },
     },
 }
+
+REDIS_HOST = os.getenv("REDIS_HOST")
+REDIS_PORT = os.getenv("REDIS_PORT")
+REDIS_USERNAME = os.getenv("REDIS_USERNAME")
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
+REDIS_SSL = strtobool(os.getenv("REDIS_SSL", "0"))
+REDIS_CELERY_DB = int(os.getenv("REDIS_CELERY_DB", "0"))
+
+REDIS_CREDENTIAL_CELERY = (
+    f"{REDIS_USERNAME}:{REDIS_PASSWORD}"
+    if REDIS_USERNAME
+    else (f":{REDIS_PASSWORD}" if REDIS_PASSWORD else "")
+)
+
+
+CELERY_BROKER_URL = (
+    f'{"rediss" if REDIS_SSL else "redis"}://'
+    f'{REDIS_CREDENTIAL_CELERY}'
+    f'@{REDIS_HOST}:{REDIS_PORT}/'
+    f'{REDIS_CELERY_DB}{"?ssl_cert_reqs=none" if REDIS_SSL else ""}'
+)
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_TASK_ALWAYS_EAGER = strtobool(
+    os.getenv("CELERY_TASK_ALWAYS_EAGER", "0")
+)
+CELERY_RESULT_EXPIRES = int(
+    os.getenv("CELERY_RESULT_EXPIRES") or 60 * 60 * 24 * 5
+)
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+if "pytest" in sys.argv[0]:
+    PASSWORD_HASHERS = [
+        "django.contrib.auth.hashers.MD5PasswordHasher",
+    ]
+    BROKER_BACKEND = "memory"
+    CELERY_TASK_ALWAYS_EAGER = True
