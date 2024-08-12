@@ -29,6 +29,9 @@ class UserAdmin(UserAdmin_):
             None,
             {
                 "fields": (
+                    "first_name",
+                    "middle_name",
+                    "last_name",
                     "phone",
                     "email",
                     "password",

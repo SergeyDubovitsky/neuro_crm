@@ -9,12 +9,13 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ("specialists", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Speciality",
+            name="Course",
             fields=[
                 (
                     "id",
@@ -39,7 +40,19 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(max_length=120, verbose_name="Название"),
+                    models.CharField(max_length=255, verbose_name="Название"),
+                ),
+                (
+                    "start_date",
+                    models.DateField(
+                        blank=True, null=True, verbose_name="Дата начала"
+                    ),
+                ),
+                (
+                    "end_date",
+                    models.DateField(
+                        blank=True, null=True, verbose_name="Дата окончания"
+                    ),
                 ),
                 (
                     "description",
@@ -47,14 +60,30 @@ class Migration(migrations.Migration):
                         blank=True, default="", verbose_name="Описание"
                     ),
                 ),
+                (
+                    "payer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Плательщик",
+                    ),
+                ),
+                (
+                    "specialist",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="specialists.specialist",
+                        verbose_name="Специалист",
+                    ),
+                ),
             ],
             options={
-                "verbose_name": "Специализация",
-                "verbose_name_plural": "Специализации",
+                "verbose_name": "Курс",
+                "verbose_name_plural": "Курсы",
             },
         ),
         migrations.CreateModel(
-            name="Specialist",
+            name="CourseLesson",
             fields=[
                 (
                     "id",
@@ -78,34 +107,41 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
+                    "name",
+                    models.CharField(
+                        default="", max_length=255, verbose_name="Название"
+                    ),
+                ),
+                (
+                    "start_dt",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Время начала"
+                    ),
+                ),
+                (
+                    "end_dt",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Время окончания"
+                    ),
+                ),
+                (
                     "description",
                     models.TextField(
                         blank=True, default="", verbose_name="Описание"
                     ),
                 ),
                 (
-                    "user",
-                    models.OneToOneField(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to=settings.AUTH_USER_MODEL,
-                        verbose_name="Пользователь системы",
-                    ),
-                ),
-                (
-                    "specialty",
+                    "course",
                     models.ForeignKey(
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="specialists.speciality",
-                        verbose_name="Специализация",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="courses.course",
+                        verbose_name="Курс",
                     ),
                 ),
             ],
             options={
-                "verbose_name": "Специалист",
-                "verbose_name_plural": "Специалисты",
+                "verbose_name": "Занятие курса",
+                "verbose_name_plural": "Занятия курса",
             },
         ),
     ]

@@ -6,12 +6,13 @@ from specialists.models import Specialist, Speciality
 @admin.register(Specialist)
 class SpecialistAdmin(admin.ModelAdmin):
     list_display = (
-        "full_name",
+        "id",
+        "user",
         "specialty",
         "get_phone",
         "get_email",
     )
-    search_fields = ("full_name", "user__email", "user__phone")
+    search_fields = ("user__email", "user__phone")
     list_filter = ("specialty",)
 
     def get_phone(self, obj):

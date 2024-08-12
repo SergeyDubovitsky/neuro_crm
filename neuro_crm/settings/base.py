@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "neuro_crm.core",
     "users",
     "specialists",
+    "courses",
 ]
 
 MIDDLEWARE = [
