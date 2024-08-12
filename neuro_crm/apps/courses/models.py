@@ -36,3 +36,31 @@ class Course(LifetimeInfo):
 
     def __str__(self):
         return self.name
+
+
+class CourseLesson(LifetimeInfo):
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Название"),
+        blank=False,
+        default="",
+    )
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, verbose_name=_("Курс")
+    )
+    start_dt = models.DateTimeField(
+        verbose_name=_("Время начала"), blank=True, null=True
+    )
+    end_dt = models.DateTimeField(
+        verbose_name=_("Время окончания"), blank=True, null=True
+    )
+    description = models.TextField(
+        verbose_name=_("Описание"), blank=True, default=""
+    )
+
+    class Meta:
+        verbose_name = _("Занятие курса")
+        verbose_name_plural = _("Занятия курса")
+
+    def __str__(self):
+        return self.name
