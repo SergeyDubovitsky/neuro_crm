@@ -10,7 +10,9 @@ User = get_user_model()
 
 class Speciality(LifetimeInfo):
     name = models.CharField(max_length=120, verbose_name=_("Название"))
-    description = models.TextField(verbose_name=_("Описание"))
+    description = models.TextField(
+        verbose_name=_("Описание"), blank=True, default=""
+    )
 
     def __str__(self):
         return self.name
@@ -34,6 +36,9 @@ class Specialist(LifetimeInfo):
         on_delete=models.SET_NULL,
         verbose_name=_("Специализация"),
         null=True,
+    )
+    description = models.TextField(
+        verbose_name=_("Описание"), blank=True, default=""
     )
 
     def __str__(self):
