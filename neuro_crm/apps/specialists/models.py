@@ -26,11 +26,10 @@ class Specialist(LifetimeInfo):
     user = models.OneToOneField(
         User,
         on_delete=models.SET_NULL,
-        verbose_name=_("Пользователь"),
+        verbose_name=_("Пользователь системы"),
         blank=True,
         null=True,
     )
-    full_name = models.CharField(max_length=120, verbose_name=_("ФИО"))
     specialty = models.ForeignKey(
         Speciality,
         on_delete=models.SET_NULL,
@@ -42,7 +41,7 @@ class Specialist(LifetimeInfo):
     )
 
     def __str__(self):
-        return self.full_name
+        return str(self.user)
 
     class Meta:
         verbose_name = _("Специалист")

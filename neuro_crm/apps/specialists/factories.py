@@ -15,6 +15,5 @@ class SpecialistFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Specialist
 
-    full_name = factory.Faker("name")
     specialty = factory.SubFactory(SpecialityFactory)
     user = factory.SubFactory(UserFactory)
